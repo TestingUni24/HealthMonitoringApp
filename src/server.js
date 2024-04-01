@@ -7,9 +7,12 @@ const server= http.createServer((req,res)=>{
    console.log(method);
    console.log(url);
    console.log(headers);
-   res.end();
+   res.end(JSON.stringify({status:200,message: "My API"}));
 });
 
-const port=3000;
-server.listen(port,() => console.log('Server running on :',server.address().port));
+const port=process.env.Port||3000;
+server.listen(port,() =>{
+   console.log('Server running on', port);
+
+});
 
