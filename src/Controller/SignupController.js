@@ -1,10 +1,12 @@
+const express= require('express');
+const body=require('body-parser');
+const app= express();
+app.use(body.urlencoded({extended: false}))
+app.use(express.json());
+
 const signup= (req,res) =>{
-    console.log(req);
-   const{headers,url,method}=req;
-   console.log(method);
-   console.log(url);
-   console.log(headers);
-    res.end(JSON.stringify({status:200,message: "SignupRoute"}))
+    console.log(req.body.JSON),
+    res.send(req.body);
 };
 
 module.exports= {signup};
