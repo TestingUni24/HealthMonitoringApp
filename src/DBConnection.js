@@ -8,7 +8,10 @@ require("msnodesqlv8");
 async function getTestData(req, res) {
     try {
         await sql.connect(config);
-        const result = await sql.query`SELECT name FROM Test`;
+        const {Email} =req.body;
+        const result = await new sql.Request()
+            .input('Email', sql.NVarChar, Email)
+            .execute('UserCheck');
         res.json(result.recordset);
     } catch (err) {
         console.error('Error occurred:', err);

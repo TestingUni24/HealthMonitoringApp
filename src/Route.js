@@ -1,20 +1,30 @@
+//Declaring the files
 const router= require('express').Router();
 const express= require('express');
 const body=require('body-parser');
-//const sql= require('mssql');
-const {signup}= require('../src/Controller/SignupController.js');
 const controller =require('./DBConnection.js')
 const signin= require('../src/Login.js');
+const fcontroller= require('../src/Controller/ForgotPasswordController.js');
 const SignupController = require('../src/Controller/SignupController.js');
+const ResetController =require('../src/ResetPassword.js')
 
 //User-routing-Signup
-router.post('/user/signup/userRegistration',SignupController.userRegistration);
-//router.get('/user/signup/getdatawithquery',controller.getTestData);
+//Registration
+router.post('/user/signup/userregistration',SignupController.userRegistration);
 
+//GetUsers
+router.post('/user/signup/getuserdata',controller.getTestData);
+
+//Forgot Password
+router.post('/user/singup/forgotpassword',fcontroller.forgotmail);
+
+//Reset Password
+router.post('/user/signup/resetpassword', ResetController.resetpassword);
+
+//Login
 router.post('/user/chklogin',signin.checkLogin);
-//router.post('/user/forgotpassword',forgotpassword)
-//router.post('/user/forgotpassword',forgotpassword)
-//router.post('/user/forgotpassword',forgotpassword)
-//console.log(router);
+
+//Activity Tracking
+
 
 module.exports=router;

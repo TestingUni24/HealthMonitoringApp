@@ -15,22 +15,27 @@ async function userRegistration(req,res)
 {
     try
     {
-        const {Username,Email,Password,FirstName,LastName,DateOfBirth,Gender,Height,Country}= req.body;
+        const {Username,Email,Password,FirstName,LastName,DateOfBirth,Gender,Height,Weight,Country}= req.body;
         await sql.connect(config);
+        
+        //Creating request with parameters
         const result =await new sql.Request()
         .input('Username', sql.NVarChar,Username)
         .input('Email',sql.NVarChar,Email)
-        .input('PasswordHash', sql.NVarChar,Password)
+        .input('Password', sql.NVarChar,Password)
         .input('FirstName',sql.NVarChar, FirstName)
         .input('LastName',sql.NVarChar,LastName)
         .input('DateOfBirth',sql.Date, DateOfBirth)
         .input('Gender',sql.NVarChar,Gender)
-        .input('Height',sql.NVarChar,Height)
+        .input('Height',sql.Decimal,Height)
+        .input('Weight',sql.Decimal,Weight)
         .input('Country',sql.NVarChar,Country)
         .execute('InsertUser')
 
-        if(result.returnValue() > 0)
-            res.json({ success: true, message: 'Login successful' });
+        console.log(result.returnValue);
+        
+        if(result.returnValue > 0)
+            res.json({ success: true, message: 'User registered successfully' });
         else
             res.status(401).json({ success: false, message: 'Email already exists',status:401 });
 
