@@ -1,6 +1,6 @@
 const sql = require("mssql");
 const config= require("../dbconfig.js");
-const userdata =require("../DBConnection.js")
+const userdata =require("../BMICalculator.js")
 const { json } = require("body-parser");
 const otpGenerator=require("otp-generator");
 const nodemailer= require("nodemailer");
