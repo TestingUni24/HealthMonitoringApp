@@ -3,6 +3,7 @@ const router= require('express').Router();
 const express= require('express');
 const body=require('body-parser');
 const controller =require('./BMICalculator.js')
+const Hydration= require('./HydrationRemainder.js')
 const signin= require('../src/Login.js');
 const fcontroller= require('../src/Controller/ForgotPasswordController.js');
 const SignupController = require('../src/Controller/SignupController.js');
@@ -23,6 +24,7 @@ router.post('/user/chklogin',signin.checkLogin);
 
 //Activity Tracking
 router.post('/user/activity/calculateBMI',controller.calculateBMI);
+router.post('/user/activity/scheduleHydrationReminder',Hydration.scheduleHydrationReminder);
 
 
 module.exports=router;

@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const Activityconfig= require("./dbconfig.js");
+const config= require("./dbconfig.js");
 const { Float } = require("msnodesqlv8");
 require("msnodesqlv8");
 
@@ -7,7 +7,7 @@ require("msnodesqlv8");
 
 async function calculateBMI(req,res ) {
     try {
-        await sql.connect(Activityconfig.config);
+        await sql.connect(config.activityconfig);
         //const {Email} =req.body;
         const { weight, height } = req.body;
         console.log(weight,height);
