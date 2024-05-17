@@ -2,7 +2,7 @@ require("msnodesqlv8");
 const config={
     user:'healthapp',
     password: 'Admin',
-    database: "DB_Login",
+    database: "DB_LOGIN",
     server: "LAPTOP-65ISNPDE\\SQLEXPRESS",
     driver: "msnodesqlv8",
     options: {

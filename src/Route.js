@@ -2,12 +2,12 @@
 const router= require('express').Router();
 const express= require('express');
 const body=require('body-parser');
-const controller =require('./BMICalculator.js')
-const Hydration= require('./HydrationRemainder.js')
-const signin= require('../src/Login.js');
-const fcontroller= require('../src/Controller/ForgotPasswordController.js');
-const SignupController = require('../src/Controller/SignupController.js');
-const ResetController =require('../src/ResetPassword.js')
+const controller =require('./Controller/ActivityController/BMICalculator.js')
+const Hydration= require('./Controller/ActivityController/HydrationRemainder.js')
+const signin= require('./Controller/UserController/Login.js');
+const fcontroller= require('./Controller/UserController/ForgotPasswordController.js');
+const SignupController = require('./Controller/UserController/SignupController.js');
+const ResetController =require('./Controller/UserController/ResetPassword.js')
 
 //User-routing-Signup
 //Registration

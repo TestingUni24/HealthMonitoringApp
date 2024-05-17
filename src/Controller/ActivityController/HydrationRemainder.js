@@ -1,6 +1,6 @@
 const sql= require('mssql');
 const moment = require('moment');
-const config= require("./dbconfig.js");
+const config= require("../../dbconfig.js");
 const { Time } = require('msnodesqlv8');
 
 async function scheduleHydrationReminder(req, res) {

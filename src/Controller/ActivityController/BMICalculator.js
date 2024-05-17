@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const config= require("./dbconfig.js");
+const config= require("../../dbconfig.js");
 const { Float } = require("msnodesqlv8");
 require("msnodesqlv8");
 

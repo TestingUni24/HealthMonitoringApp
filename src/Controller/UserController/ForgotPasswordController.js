@@ -1,6 +1,6 @@
 const sql = require("mssql");
-const config= require("../dbconfig.js");
-const userdata =require("../BMICalculator.js")
+const config= require("../../dbconfig.js");
+const userdata =require("../ActivityController/BMICalculator.js")
 const { json } = require("body-parser");
 const otpGenerator=require("otp-generator");
 const nodemailer= require("nodemailer");
@@ -10,7 +10,7 @@ require("msnodesqlv8");
 async function forgotmail(req, res) {
     const { Email } = req.body;
     try {
-        await sql.connect(config);
+        await sql.connect(config.config);
         const request = await new sql.Request()
             .input('Email', sql.NVarChar, Email)
             .output('Output', sql.Int); // Define the output parameter here
