@@ -1,10 +1,10 @@
 const sql= require('mssql');
-const config= require('../src/dbconfig.js');
+const config= require('../../dbconfig.js');
 
 async function resetpassword(req, res) {
     const { Email,OldPassword,NewPassword } = req.body;
     try {
-        await sql.connect(config);
+        await sql.connect(config.config);
         const request = await new sql.Request()
             .input('Email', sql.NVarChar, Email)
             .input('OldPassword', sql.NVarChar, OldPassword)

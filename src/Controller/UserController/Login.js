@@ -1,13 +1,14 @@
-//const express= require('express');
-//const body=require('body-parser');
+
 const sql= require('mssql');
 //const app= express();
-const config= require('../src/dbconfig.js');
+const config= require('../../dbconfig.js');
 
 async function checkLogin(req, res) {
-    const { Email } = req.body;
+    const { Email,Password } = req.body;
+    console.log(config.config.server);
     try {
-        await sql.connect(config);
+        await sql.connect(config.config);
+        
         const request = await new sql.Request()
             .input('Email', sql.NVarChar, Email)
             .input('Password', sql.NVarChar, Password)
