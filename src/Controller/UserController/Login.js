@@ -11,19 +11,16 @@ async function checkLogin(req, res) {
         
         const request = await new sql.Request()
             .input('Email', sql.NVarChar, Email)
-            .input('Password', sql.NVarChar, Password)
-            .output('Output', sql.Int); // Define the output parameter here
+            .input('Password', sql.NVarChar, Password); 
     
         // Execute the stored procedure
         const data = await request.execute('LoginCheck');
-    
-        // Retrieve the output parameter value
-        const outputValue = data.output.Output;
-        console.log(outputValue);
+        
+        console.log(data.recordset);
     
         // Check the output parameter value to determine login success or failure
-        if (outputValue === 1) {
-            res.json({ status: true, message: 'Login successful' });
+        if (data.recordset.length>0) {
+            res.json({ status: true, message: 'Login successful',result:data.recordset});
         } else {
             res.status(401).json({ status: false, message: 'Invalid username or password', statuscode: 401 });
         }

@@ -12,11 +12,7 @@ async function getMeals(req,res)
         .input('UserID',sql.Int,UserID)    
         .execute('sp_getMeals');
         
-        if (result.returnValue > 0) {
-            res.json({ success: true, message: 'User registered successfully' });
-        } else {
-            res.status(401).json({ success: false, message: 'Email already exists' });
-        }
+        res.json(result.recordset);
 
     }
     catch (err) {
