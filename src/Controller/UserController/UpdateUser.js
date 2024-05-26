@@ -1,42 +1,37 @@
 const express = require('express');
-const bodyParser = require('body-parser'); // Corrected the require statement
+const bodyParser = require('body-parser'); 
 const sql = require('mssql');
 const app = express();
-const config = require('../../dbconfig.js'); // Ensure this file exports the correct configuration
+const config = require('../../dbconfig.js'); 
 const { Email } = require('../../env.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // User registration
-async function userRegistration(req, res) {
+async function userUpdate(req, res) {
     try {
-        const { Username, Email, Password, FirstName, LastName, DateOfBirth, Gender, Height, Weight, Country,DietType } = req.body;
+        const {  UserID,Password,  Height, Weight, Country,DietType } = req.body;
 
         // Connect to the database
         await sql.connect(config.config);
         console.log(config);
         // Creating request with parameters
         const result = await new sql.Request()
-            .input('Username', sql.NVarChar, Username)
-            .input('Email', sql.NVarChar, Email)
+            .input('UserID',sql.Int,UserID)
             .input('Password', sql.NVarChar, Password)
-            .input('FirstName', sql.NVarChar, FirstName)
-            .input('LastName', sql.NVarChar, LastName)
-            .input('DateOfBirth', sql.Date, DateOfBirth)
-            .input('Gender', sql.NVarChar, Gender)
             .input('Height', sql.Decimal, Height)
             .input('Weight', sql.Decimal, Weight)
             .input('Country', sql.NVarChar, Country)
             .input('DietType',sql.NVarChar,DietType)
-            .execute('InsertUser');
+            .execute('UpdateUser');
 
         console.log(result.returnValue);
 
         if (result.returnValue > 0) {
-            res.json({ success: true, message: 'User registered successfully' });
+            res.json({ success: true, message: 'User Updated successfully' });
         } else {
-            res.status(401).json({ success: false, message: 'Email already exists' });
+            res.status(401).json({ success: false, message: 'User Updation Failed' });
         }
 
     } catch (err) {
@@ -49,5 +44,5 @@ async function userRegistration(req, res) {
 }
 
 module.exports = {
-    userRegistration: userRegistration,
+    userUpdate: userUpdate,
 };
