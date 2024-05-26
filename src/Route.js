@@ -12,12 +12,13 @@ const ResetController =require('./Controller/UserController/ResetPassword.js');
 const NutritionTracker= require('./Controller/ActivityController/NutritionTracker.js');
 const StepCounter= require('./Controller/ActivityController/StepsCounter.js');
 const Heartbeat= require('./Controller/ActivityController/Heartbeat.js');
-const customPlan=require('./Controller/ActivityController/CustomWorkoutDiet.js')
+const customPlan=require('./Controller/ActivityController/CustomWorkoutDiet.js');
 const Oxygen= require('./Controller/ActivityController/OxygenMonitoring.js');
-const NutritionTrackerScan=require('./Controller/ActivityController/NutritionTrackerScan.js')
-const Swim=require('./Controller/ActivityController/SwimmingTracker.js')
-const Blog= require('./Controller/ActivityController/HFBlog.js')
-const Workout= require('./Controller/ActivityController/WorkoutMonitoring.js')
+const NutritionTrackerScan=require('./Controller/ActivityController/NutritionTrackerScan.js');
+const Swim=require('./Controller/ActivityController/SwimmingTracker.js');
+const Blog= require('./Controller/ActivityController/HFBlog.js');
+const Sleep=require('./Controller/ActivityController/SleepMonitoring.js');
+const Workout= require('./Controller/ActivityController/WorkoutMonitoring.js');
 //User-routing-Signup
 //Registration
 router.post('/user/signup/userregistration',SignupController.userRegistration);
@@ -43,6 +44,8 @@ router.post('/user/activity/workout/insertWorkout',Workout.insertWorkout);
 router.get('/user/activity/workout/getWorkout',Workout.GetWorkout);
 router.post('/user/activity/swimming/insertswimming',Swim.insertSwimming);
 router.get('/user/activity/swimming/getswimming',Swim.GetSwimming);
+router.get('/user/activity/swimming/getsleep',Sleep.InsertSleep);
+router.post('/user/activity/swimming/insertsleep',Sleep.GetSleep);
 router.post('/user/activity/heartbeat/insertheartbeat',Heartbeat.insertHearbeats);
 router.get('/user/activity/heartbeat/getheartbeat',Heartbeat.GetHeartbeats);
 router.post('/user/activity/customWorkoutplan/customplan',customPlan.customPlan);
