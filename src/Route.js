@@ -17,6 +17,7 @@ const Oxygen= require('./Controller/ActivityController/OxygenMonitoring.js');
 const NutritionTrackerScan=require('./Controller/ActivityController/NutritionTrackerScan.js')
 const Swim=require('./Controller/ActivityController/SwimmingTracker.js')
 const Blog= require('./Controller/ActivityController/HFBlog.js')
+const Workout= require('./Controller/ActivityController/WorkoutMonitoring.js')
 //User-routing-Signup
 //Registration
 router.post('/user/signup/userregistration',SignupController.userRegistration);
@@ -33,21 +34,23 @@ router.post('/user/chklogin',signin.checkLogin);
 //Activity Tracking
 router.post('/user/activity/calculateBMI',controller.calculateBMI);
 router.post('/user/activity/stepcounter/insertsteps',StepCounter.insertSteps);
-router.post('/user/activity/stepcounter/getsteps',StepCounter.GetSteps);
+router.get('/user/activity/stepcounter/getsteps',StepCounter.GetSteps);
 router.post('/user/activity/oxygen/insertoxygen',Oxygen.insertOxygen);
-router.post('/user/activity/oxygen/getoxygen',Oxygen.GetOxygen);
+router.get('/user/activity/oxygen/getoxygen',Oxygen.GetOxygen);
 router.post('/user/activity/blog/insertblog',Blog.insertBlog);
-router.post('/user/activity/blog/getblog',Blog.GetBlog);
+router.get('/user/activity/blog/getblog',Blog.GetBlog);
+router.post('/user/activity/workout/insertWorkout',Workout.insertWorkout);
+router.get('/user/activity/workout/getWorkout',Workout.GetWorkout);
 router.post('/user/activity/swimming/insertswimming',Swim.insertSwimming);
-router.post('/user/activity/swimming/getswimming',Swim.GetSwimming);
+router.get('/user/activity/swimming/getswimming',Swim.GetSwimming);
 router.post('/user/activity/heartbeat/insertheartbeat',Heartbeat.insertHearbeats);
-router.post('/user/activity/heartbeat/getheartbeat',Heartbeat.GetHeartbeats);
+router.get('/user/activity/heartbeat/getheartbeat',Heartbeat.GetHeartbeats);
 router.post('/user/activity/customWorkoutplan/customplan',customPlan.customPlan);
 router.post('/user/activity/scheduleHydrationReminder',Hydration.scheduleHydrationReminder);
-router.post('/user/activity/nutritionTracker/getMeals',NutritionTracker.getMeals);
-router.post('/user/activity/nutritionTracker/getFood',NutritionTracker.getFood);
+router.get('/user/activity/nutritionTracker/getMeals',NutritionTracker.getMeals);
+router.getFood('/user/activity/nutritionTracker/getFood',NutritionTracker.getFood);
 router.get('/user/activity/nutritionTracker/getCuisine',NutritionTracker.getCuisine);
-router.post('/user/activity/nutritionTracker/getIntake',NutritionTracker.getIntake);
+router.get('/user/activity/nutritionTracker/getIntake',NutritionTracker.getIntake);
 router.post('/user/activity/nutritionTracker/InsertIntake',NutritionTracker.InsertIntake);
 
 // Set up multer for file upload
