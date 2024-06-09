@@ -15,21 +15,24 @@ async function userRegistration(req, res) {
 
         // Connect to the database
         await sql.connect(config.config);
-        console.log(config);
+        console.log(DateOfBirth);
+        //const dob= new Date(DateOfBirth);
+        //console.log(dob);
         // Creating request with parameters
+        
+        
         const result = await new sql.Request()
             .input('Username', sql.NVarChar, Username)
             .input('Email', sql.NVarChar, Email)
             .input('Password', sql.NVarChar, Password)
             .input('FirstName', sql.NVarChar, FirstName)
             .input('LastName', sql.NVarChar, LastName)
-            .input('DateOfBirth', sql.Date, DateOfBirth)
-            .input('Gender', sql.NVarChar, Gender)
+            .input('DateOfBirth', sql.NVarChar, DateOfBirth)
             .input('Height', sql.Decimal, Height)
             .input('Weight', sql.Decimal, Weight)
             .input('Country', sql.NVarChar, Country)
             .input('DietType',sql.NVarChar,DietType)
-            .execute('InsertUser');
+            .execute('InsertUser')
 
         console.log(result.returnValue);
 

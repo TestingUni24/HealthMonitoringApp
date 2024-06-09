@@ -19,12 +19,13 @@ const Swim=require('./Controller/ActivityController/SwimmingTracker.js');
 const Blog= require('./Controller/ActivityController/HFBlog.js');
 const Sleep=require('./Controller/ActivityController/SleepMonitoring.js');
 const Workout= require('./Controller/ActivityController/WorkoutMonitoring.js');
+const Update=require('./Controller/UserController/UpdateUser.js');
 //User-routing-Signup
 //Registration
 router.post('/user/signup/userregistration',SignupController.userRegistration);
 
 //Forgot Password
-router.post('/user/singup/forgotpassword',fcontroller.forgotmail);
+router.post('/user/signup/forgotpassword',fcontroller.forgotmail);
 
 //Reset Password
 router.post('/user/signup/resetpassword', ResetController.resetpassword);
@@ -32,28 +33,36 @@ router.post('/user/signup/resetpassword', ResetController.resetpassword);
 //Login
 router.post('/user/chklogin',signin.checkLogin);
 
+//UserSubscription
+router.post('/user/update/subscription',Update.payment);
+
+//UserUpdate
+router.post('/user/update/user',Update.userUpdate);
+
+
 //Activity Tracking
 router.post('/user/activity/calculateBMI',controller.calculateBMI);
 router.post('/user/activity/stepcounter/insertsteps',StepCounter.insertSteps);
-router.get('/user/activity/stepcounter/getsteps',StepCounter.GetSteps);
+router.post('/user/activity/stepcounter/getsteps',StepCounter.GetSteps);
 router.post('/user/activity/oxygen/insertoxygen',Oxygen.insertOxygen);
-router.get('/user/activity/oxygen/getoxygen',Oxygen.GetOxygen);
+router.post('/user/activity/oxygen/getoxygen',Oxygen.GetOxygen);
 router.post('/user/activity/blog/insertblog',Blog.insertBlog);
-router.get('/user/activity/blog/getblog',Blog.GetBlog);
+router.post('/user/activity/blog/getblog',Blog.GetBlog);
 router.post('/user/activity/workout/insertWorkout',Workout.insertWorkout);
-router.get('/user/activity/workout/getWorkout',Workout.GetWorkout);
+router.post('/user/activity/workout/getWorkout',Workout.GetWorkout);
 router.post('/user/activity/swimming/insertswimming',Swim.insertSwimming);
-router.get('/user/activity/swimming/getswimming',Swim.GetSwimming);
-router.get('/user/activity/swimming/getsleep',Sleep.InsertSleep);
-router.post('/user/activity/swimming/insertsleep',Sleep.GetSleep);
+router.post('/user/activity/swimming/getswimming',Swim.GetSwimming);
+router.post('/user/activity/sleep/insertsleep',Sleep.insertSleep);
+router.post('/user/activity/sleep/getsleep',Sleep.GetSleep);
 router.post('/user/activity/heartbeat/insertheartbeat',Heartbeat.insertHearbeats);
-router.get('/user/activity/heartbeat/getheartbeat',Heartbeat.GetHeartbeats);
+router.post('/user/activity/heartbeat/getheartbeat',Heartbeat.GetHeartbeats);
 router.post('/user/activity/customWorkoutplan/customplan',customPlan.customPlan);
 router.post('/user/activity/scheduleHydrationReminder',Hydration.scheduleHydrationReminder);
-router.get('/user/activity/nutritionTracker/getMeals',NutritionTracker.getMeals);
-router.getFood('/user/activity/nutritionTracker/getFood',NutritionTracker.getFood);
-router.get('/user/activity/nutritionTracker/getCuisine',NutritionTracker.getCuisine);
-router.get('/user/activity/nutritionTracker/getIntake',NutritionTracker.getIntake);
+router.post('/user/activity/nutritionTracker/getMeals',NutritionTracker.getMeals);
+router.post('/user/activity/nutritionTracker/getFood',NutritionTracker.getFood);
+router.post('/user/activity/nutritionTracker/getCuisine',NutritionTracker.getCuisine);
+router.post('/user/activity/nutritionTracker/getIntake',NutritionTracker.getIntake);
+router.post('/user/activity/nutritionTracker/insertFood',NutritionTracker.InsertFood);
 router.post('/user/activity/nutritionTracker/InsertIntake',NutritionTracker.InsertIntake);
 
 // Set up multer for file upload
@@ -68,7 +77,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 // Route to handle image upload and processing
-router.post('/user/activity/nutritionTracker/mealdata', upload.single('mealImage'), NutritionTrackerScan.scanMeal);
+//router.post('/user/activity/nutritionTracker/mealdata', upload.single('mealImage'), NutritionTrackerScan.scanMeal);
+router.post('/user/activity/nutritionTracker/mealdata', NutritionTrackerScan.getCalories);
 
 
 

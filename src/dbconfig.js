@@ -25,7 +25,14 @@ const activityconfig={
     }
 }
 
+const axios = require('axios');
+
+const apiClient = axios.create({
+    baseURL: 'https://api.calorieninjas.com/v1',
+    headers: {
+        'X-Api-Key':'hOZo0POoWW6ALZ2XuHfycQ==LiohdtpfQmCw3msI'
+    }
+});
 
 
-
-module.exports={ config, activityconfig};
+module.exports={ config, activityconfig,apiClient};
