@@ -39,7 +39,7 @@ async function scheduleHydrationReminder(req, res) {
 
         // Respond with success and the ID of the new reminder
         //const newReminderID = result.output.NewReminderID;
-        return res.json({ success: true, reminderId: 1234 });
+        return res.json({ success: true });
     } catch (error) {
         console.error('Error scheduling hydration reminder:', error);
         return res.status(500).json({ error: 'Internal Server Error' });

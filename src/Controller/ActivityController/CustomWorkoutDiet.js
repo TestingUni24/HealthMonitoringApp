@@ -35,9 +35,9 @@ const DietPlan = (dietType) => {
 
 async function customPlan (req, res)
 {
-    const { UserId, Weight, Height,DietType } = req.body;
+    const { UserID, Weight, Height,DietType } = req.body;
 
-    if (!UserId || !Weight || !Height || !DietType) {
+    if (!UserID || !Weight || !Height || !DietType) {
         return res.status(400).send('Missing required parameters.');
     }
 
@@ -50,19 +50,19 @@ async function customPlan (req, res)
 
         // Insert workout plan using stored procedure
         const workout = await new sql.Request()
-            .input('UserId', sql.Int, UserId)
+            .input('UserId', sql.Int, UserID)
             .input('Workout', sql.NVarChar, workoutPlan)
             .execute('InsertWorkout');
 
         // Insert diet plan using stored procedure
         const diet = await new sql.Request()
-            .input('UserId', sql.Int, UserId)
+            .input('UserId', sql.Int, UserID)
             .input('Meal', sql.NVarChar, dietPlan)
             .execute('InsertDietPlan');
 
         res.status(201).send({ workoutPlan, dietPlan });
     } catch (error) {
-        res.status(500).send(error.message);
+        res.send(error.message);
     }
 };
 

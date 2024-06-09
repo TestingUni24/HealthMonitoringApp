@@ -10,10 +10,10 @@ async function insertSwimming(req,res)
         const{UserID,Duration}= req.body;
         const result = await new sql.Request()
             .input('UserID', sql.Int,UserID )
-            .input('Duration',sql.Time,Duration)
+            .input('Duration',sql.Int,Duration)
             .execute('sp_InsertSwimming');
        
-            if (result.returnValue = 0) {
+            if (result.returnValue == 0) {
                 res.json({ status: true, message:'Swimming Data inserted successfully' });
             } else {
                 res.status(401).json({ status: false, message: 'Something Went wrong' });
@@ -37,10 +37,13 @@ async function GetSwimming(req,res)
     {
         await sql.connect(config.activityconfig)
         const{UserID,SDate,EDate}= req.body;
+        const getSdate= new Date(SDate);
+        const getEdate= new Date(EDate);
+        
         const result = await new sql.Request()
             .input('UserID', sql.Int,UserID )
-            .input('SDate', sql.Date, SDate)
-            .input('EDate', sql.Date, EDate)
+            .input('SDate', sql.Date, getSdate)
+            .input('EDate', sql.Date, getEdate)
             .execute('sp_GetSwimming');
        
             res.json(result.recordset);

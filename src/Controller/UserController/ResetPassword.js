@@ -2,12 +2,11 @@ const sql= require('mssql');
 const config= require('../../dbconfig.js');
 
 async function resetpassword(req, res) {
-    const { Email,OldPassword,NewPassword } = req.body;
+    const { Email,NewPassword } = req.body;
     try {
         await sql.connect(config.config);
         const request = await new sql.Request()
             .input('Email', sql.NVarChar, Email)
-            .input('OldPassword', sql.NVarChar, OldPassword)
             .input('NewPassword',sql.NVarChar,NewPassword)
             .output('Output', sql.Int); // Define the output parameter here
     
@@ -26,11 +25,11 @@ async function resetpassword(req, res) {
         else {
             if(outputValue === 2)//Existing password check condition
             {
-                res.status(401).json({ status: false, message: 'Password Mismatch', statuscode: 401 });
+                res.json({ status: false, message: 'Password Mismatch', statuscode: 401 });
             }
             else
             {
-                res.status(401).json({ status: false, message: 'Invalid username or password', statuscode: 401 });
+                res.json({ status: false, message: 'Invalid username or password', statuscode: 401 });
             }
             
         }

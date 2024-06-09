@@ -7,14 +7,18 @@ async function insertSteps(req,res)
     try
     {
         await sql.connect(config.activityconfig)
-        const{UserID,Steps,Date}= req.body;
+        const{UserID,Steps,Date:Dates}= req.body;
+        const getdate= new Date(Dates);
+
+        console.log(getdate);
         const result = await new sql.Request()
             .input('UserID', sql.Int,UserID )
             .input('Steps',sql.Int,Steps)
-            .input('Date', sql.Int, Date)
+            .input('Date', sql.Date, getdate)
             .execute('sp_InsertSteps');
        
-            if (result.returnValue = 0) {
+            console.log(result);
+            if (result.returnValue == 0) {
                 res.json({ status: true, message: 'Steps inserted successfully' });
             } else {
                 res.status(401).json({ status: false, message: 'Something Went wrong' });
@@ -38,12 +42,14 @@ async function GetSteps(req,res)
     {
         await sql.connect(config.activityconfig)
         const{UserID,SDate,EDate}= req.body;
+        const getSdate= new Date(SDate);
+        const getEdate= new Date(EDate);
+        
         const result = await new sql.Request()
             .input('UserID', sql.Int,UserID )
-            .input('SDate', sql.Date, SDate)
-            .input('EDate', sql.Date, EDate)
+            .input('SDate', sql.Date, getSdate)
+            .input('EDate', sql.Date, getEdate)
             .execute('sp_GetSteps');
-       
             res.json(result.recordset);
     }
     catch(err)
